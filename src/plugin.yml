@@ -1,0 +1,6 @@
+name: Kingdoms
+version: 1.0
+author: Erez
+main: me.erez.kingdoms.Main
+description: Kingdoms RPG plugin
+api-version: 1.18

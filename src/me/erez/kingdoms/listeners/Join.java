@@ -1,7 +1,7 @@
 package me.erez.kingdoms.listeners;
 
 import me.erez.kingdoms.Main;
-import me.erez.kingdoms.roles.Roles;
+import me.erez.kingdoms.proficiency.ProficiencyHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,58 +45,7 @@ public class Join implements Listener{
 	public void JoinEvent(PlayerJoinEvent event) {
 		
 		Player player = event.getPlayer();
-		String uuid = player.getUniqueId().toString();
-		
-		
-		
-		plugin.data.reloadConfig();
-		//See if the player has joined the server
-		if(!(plugin.data.getConfig().contains("roles." + uuid))) { 
-			
-			plugin.data.getConfig().set("roles. " + uuid + ".playerName", player.getName());
-			plugin.data.getConfig().set("roles." + uuid + ".isAlchemist", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isBlacksmith", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isEnchanter", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isEngineer", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isExplorer", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isFarmer", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isHunter", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isKing", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isLumberjack", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isMiner", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isWarrior", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isWizard", false);
-			plugin.data.getConfig().set("roles." + uuid + ".isPeasant", true);
-			
-			plugin.data.saveConfig();
-			
-			Roles role = new Roles(player, player.getName());
-			plugin.roles.add(role);
-			
-			return;
-			
-		}
-		
-		boolean isAlchemist = plugin.data.getConfig().getBoolean("roles." + uuid + "isAlchemist");
-		boolean isBlacksmith = plugin.data.getConfig().getBoolean("roles." + uuid + "isBlacksmith");
-		boolean isEnchanter = plugin.data.getConfig().getBoolean("roles." + uuid + ".isEnchanter");
-		boolean isEngineer = plugin.data.getConfig().getBoolean("roles." + uuid + ".isEngineer");
-		boolean isExplorer = plugin.data.getConfig().getBoolean("roles." + uuid + ".isExplorer");
-		boolean isFarmer = plugin.data.getConfig().getBoolean("roles." + uuid + ".isFarmer");
-		boolean isHunter = plugin.data.getConfig().getBoolean("roles." + uuid + ".isHunter");
-		boolean isKing = plugin.data.getConfig().getBoolean("roles." + uuid + ".isKing");
-		boolean isLumberjack = plugin.data.getConfig().getBoolean("roles." + uuid + ".isLumberjack");
-		boolean isMiner = plugin.data.getConfig().getBoolean("roles." + uuid + ".isMiner");
-		boolean isWarrior = plugin.data.getConfig().getBoolean("roles." + uuid + ".isWarrior");
-		boolean isWizard = plugin.data.getConfig().getBoolean("roles." + uuid + ".isWizard");
-		boolean isPeasant = plugin.data.getConfig().getBoolean("roles." + uuid + ".isPeasant");
-		
-		Roles role = new Roles(player, isAlchemist, isBlacksmith, isEnchanter, isEngineer,
-				isExplorer, isFarmer, isHunter, isKing, isLumberjack, isMiner, isWarrior, isWizard, isPeasant);
-		
-		plugin.roles.add(role);
-
-		
+		plugin.handleDataFile(player);
 		
 	
 		
